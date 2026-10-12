@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blue: #0a4fb4;
+  --color-orange: #e8760c;
+  --color-ink: #101a2e;
+  --color-mist: #eaf0fa;
+  --color-paper: #f7f9fd;
+  --font-logo: 'Permanent Marker', 'Comic Sans MS', cursive;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+body { background: #f7f9fd; color: #101a2e; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.7; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* motif kotak-kotak khas Warlok */
+.checks { height: 38px; background: conic-gradient(#0a4fb4 25%, #fff 0 50%, #0a4fb4 0 75%, #fff 0) 0 0 / 38px 38px; }
+
+@layer components {
+  .btn { @apply inline-block cursor-pointer border border-blue bg-blue px-6 py-3 text-center text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#083d8c]; }
+  .btn-line { @apply border-ink bg-transparent text-ink hover:bg-ink hover:text-white; }
+  .input { @apply w-full border-b border-slate-300 bg-transparent py-2 text-sm outline-none focus:border-ink; }
+  .label { @apply text-[11px] font-bold uppercase tracking-[.2em] text-orange; }
+  .wrap { @apply mx-auto w-full max-w-6xl px-5; }
+}

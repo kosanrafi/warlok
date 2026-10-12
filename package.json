@@ -1,0 +1,16 @@
+{
+  "name": "warlok",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "nuxt dev", "build": "nuxt build", "preview": "nuxt preview" },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "nuxt": "^4.5.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}

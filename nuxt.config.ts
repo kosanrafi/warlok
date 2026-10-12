@@ -1,0 +1,29 @@
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineNuxtConfig({
+  compatibilityDate: '2026-10-01',
+  devtools: { enabled: false },
+  css: ['~/assets/css/main.css'],
+  vite: { plugins: [tailwindcss()] },
+  app: {
+    head: {
+      htmlAttrs: { lang: 'id' },
+      meta: [{ name: 'theme-color', content: '#0a4fb4' }],
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        // hanya memuat huruf W-A-R-L-O-K (beberapa KB) untuk logo
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap&text=WARLOK' }
+      ]
+    }
+  },
+  // diisi dari env: NUXT_DATABASE_URL, NUXT_ADMIN_PASSWORD, NUXT_SESSION_SECRET
+  runtimeConfig: { databaseUrl: '', adminPassword: '', sessionSecret: '' },
+  routeRules: {
+    '/': { swr: 60 },
+    '/menu': { swr: 60 },
+    '/api/site': { swr: 30 },
+    '/admin': { ssr: false },
+    '/admin/**': { ssr: false }
+  }
+})
