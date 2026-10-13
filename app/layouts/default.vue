@@ -7,6 +7,7 @@ const links = [['Beranda', '/'], ['Cerita Kami', '/#cerita'], ['Menu', '/menu'],
 </script>
 <template>
   <div class="flex min-h-dvh flex-col">
+    <div class="splash" aria-hidden="true"><span class="font-logo text-5xl text-blue">WARLOK</span><small class="text-[9px] font-bold uppercase tracking-[.3em] text-orange">{{ s.brand_full }}</small><i /></div>
     <header class="sticky top-0 z-50 border-b border-black/5 bg-paper/90 backdrop-blur">
       <div class="wrap flex h-16 items-center justify-between">
         <NuxtLink to="/" class="font-logo text-2xl text-blue" @click="open = false">WARLOK</NuxtLink>
@@ -27,7 +28,7 @@ const links = [['Beranda', '/'], ['Cerita Kami', '/#cerita'], ['Menu', '/menu'],
     <div class="checks" aria-hidden="true" />
     <footer class="bg-white py-12 text-sm text-slate-600">
       <div class="wrap grid gap-8 sm:grid-cols-3">
-        <div><p class="font-logo text-3xl text-blue">WARLOK</p><p>{{ s.brand_full }}</p><p>{{ s.tagline }}</p></div>
+        <div><p class="font-logo text-3xl text-blue">WARLOK</p><p>{{ s.brand_full }}</p><p>{{ s.tagline }}</p><p v-if="s.hero_label">{{ s.hero_label }}</p></div>
         <div v-if="s.address || s.hours"><h4 class="label mb-2">Lokasi</h4><p>{{ s.address }}</p><p>{{ s.hours }}</p></div>
         <div class="grid content-start gap-1">
           <h4 class="label mb-1">Ikuti Kami</h4>

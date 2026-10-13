@@ -23,3 +23,14 @@ body { background: #f7f9fd; color: #101a2e; font-family: system-ui, -apple-syste
   .label { @apply text-[11px] font-bold uppercase tracking-[.2em] text-orange; }
   .wrap { @apply mx-auto w-full max-w-6xl px-5; }
 }
+
+/* ===== animasi masuk ===== */
+.splash { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; justify-items: center; gap: 14px; background: #fff; pointer-events: none; animation: splash-out .6s ease 1.15s forwards; }
+.splash i { display: block; width: 60px; height: 2px; background: #e8760c; transform-origin: left; animation: bar 1s ease forwards; }
+@keyframes splash-out { to { opacity: 0; visibility: hidden; } }
+@keyframes bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.in { animation: up .7s ease both; animation-delay: calc(.85s + var(--d, 0) * .12s); }
+.rv { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.rv.rv-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .splash { display: none; } .in { animation: none; } .rv { opacity: 1; transform: none; } }

@@ -68,6 +68,7 @@ const tabs = [['menu', 'Menu'], ['cat', 'Kategori'], ['site', 'Konten Situs']] a
       <!-- MENU -->
       <section v-if="tab === 'menu'" class="grid gap-4">
         <p v-if="!cats.length" class="bg-amber-50 p-3 text-sm text-amber-800">Buat kategori dulu di tab Kategori.</p>
+        <p class="text-xs text-slate-500">Tarik foto ke kotak foto atau klik <b>Pilih file</b>, lalu klik <b>Simpan</b> pada baris menunya.</p>
         <div><button class="btn" :disabled="!cats.length" @click="add(items, { id: null, name: '', category: cats[0]?.slug, tag: '', price: 0, description: '', image_url: '', emoji: '', is_available: true, sort: 0 })">+ Tambah Menu</button></div>
         <div v-for="(it, i) in items" :key="it.id ?? 'baru' + i" class="grid gap-3 border border-slate-200 bg-white p-4 sm:grid-cols-6">
           <input v-model="it.name" class="input sm:col-span-2" placeholder="Nama menu">
@@ -75,8 +76,8 @@ const tabs = [['menu', 'Menu'], ['cat', 'Kategori'], ['site', 'Konten Situs']] a
           <input v-model="it.tag" class="input" placeholder="Label (opsional)">
           <input v-model.number="it.price" type="number" min="0" class="input" placeholder="Harga (Rp)">
           <input v-model="it.emoji" class="input" placeholder="Emoji">
-          <input v-model="it.image_url" class="input sm:col-span-3" placeholder="URL foto (opsional, https://...)">
-          <input v-model="it.description" class="input sm:col-span-3" placeholder="Deskripsi singkat">
+          <ImageUpload v-model="it.image_url" class="sm:col-span-6" />
+          <input v-model="it.description" class="input sm:col-span-6" placeholder="Deskripsi singkat">
           <label class="flex items-center gap-2 text-sm"><input v-model="it.is_available" type="checkbox"> Tampil</label>
           <input v-model.number="it.sort" type="number" class="input" placeholder="Urutan">
           <div class="flex gap-2 sm:col-span-4 sm:justify-end">
@@ -104,7 +105,8 @@ const tabs = [['menu', 'Menu'], ['cat', 'Kategori'], ['site', 'Konten Situs']] a
       <form v-else class="grid gap-5" @submit.prevent="saveSettings">
         <template v-for="(f, i) in FIELDS" :key="f.key">
           <h3 v-if="i === 0 || FIELDS[i - 1].group !== f.group" class="label mt-4">{{ f.group }}</h3>
-          <label class="grid gap-1">
+          <div v-if="'type' in f" class="grid gap-1"><span class="text-xs font-bold text-slate-500">{{ f.label }}</span><ImageUpload v-model="settings[f.key]" /><p class="text-xs text-slate-500">Klik <b>Simpan Konten</b> di bawah setelah memilih foto.</p></div>
+          <label v-else class="grid gap-1">
             <span class="text-xs font-bold text-slate-500">{{ f.label }}</span>
             <textarea v-if="'long' in f" v-model="settings[f.key]" rows="3" class="input border border-slate-300 p-2" />
             <input v-else v-model="settings[f.key]" class="input">

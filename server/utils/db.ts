@@ -17,7 +17,7 @@ export function dbFail(e: any): never {
     statusCode: 500,
     statusMessage: 'Database bermasalah',
     message: noTable
-      ? 'Tabel belum ada. Jalankan isi neon-setup.sql di Neon > SQL Editor.'
+      ? 'Tabel belum ada. Jalankan neon-setup.sql lalu neon-update.sql di Neon > SQL Editor.'
       : 'Tidak bisa terhubung ke Neon. Pastikan NUXT_DATABASE_URL adalah connection string asli dari dashboard Neon.'
   })
 }

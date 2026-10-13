@@ -10,6 +10,7 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'id' },
       meta: [{ name: 'theme-color', content: '#0a4fb4' }],
       link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         // hanya memuat huruf W-A-R-L-O-K (beberapa KB) untuk logo
@@ -18,7 +19,10 @@ export default defineNuxtConfig({
     }
   },
   // diisi dari env: NUXT_DATABASE_URL, NUXT_ADMIN_PASSWORD, NUXT_SESSION_SECRET
-  runtimeConfig: { databaseUrl: '', adminPassword: '', sessionSecret: '' },
+  runtimeConfig: {
+    databaseUrl: '', adminPassword: '', sessionSecret: '',
+    public: { siteUrl: 'https://warloktasik.vercel.app' } // ganti via NUXT_PUBLIC_SITE_URL bila pakai domain sendiri
+  },
   routeRules: {
     '/': { swr: 60 },
     '/menu': { swr: 60 },
