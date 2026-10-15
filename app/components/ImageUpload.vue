@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // Tarik-lepas atau pilih file. Foto dikecilkan di browser (WebP) lalu diunggah ke Neon.
 defineProps<{ modelValue?: string }>()
-const emit = defineEmits<{ 'update:modelValue': [value: string] }>()
+const emit = defineEmits<{ 'update:modelValue': [value: string]; done: [] }>()
 const input = ref<HTMLInputElement>()
 const busy = ref(false), over = ref(false), error = ref('')
 
@@ -33,6 +33,7 @@ async function pick(file?: File | null) {
     const body = await shrink(file)
     const r: any = await $fetch('/api/admin/upload', { method: 'POST', body })
     emit('update:modelValue', r.url)
+    emit('done') // induk menyimpan otomatis
   } catch (e: any) { error.value = e?.data?.statusMessage || e?.message || 'Gagal mengunggah' }
   finally { busy.value = false; if (input.value) input.value.value = '' }
 }
@@ -52,7 +53,7 @@ const drop = (e: DragEvent) => { over.value = false; pick(e.dataTransfer?.files?
     </div>
     <div class="grid gap-1 text-xs">
       <button type="button" class="btn btn-line px-3! py-2!" @click="input?.click()">Pilih file</button>
-      <button v-if="modelValue" type="button" class="text-left text-red-600" @click="emit('update:modelValue', '')">Hapus foto</button>
+      <button v-if="modelValue" type="button" class="text-left text-red-600" @click="emit('update:modelValue', ''); emit('done')">Hapus foto</button>
       <span v-if="error" class="text-red-600">{{ error }}</span>
     </div>
     <input ref="input" type="file" accept="image/*" class="hidden" @change="pick(($event.target as HTMLInputElement).files?.[0])">

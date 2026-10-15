@@ -24,9 +24,9 @@ export default defineNuxtConfig({
     public: { siteUrl: 'https://warloktasik.vercel.app' } // ganti via NUXT_PUBLIC_SITE_URL bila pakai domain sendiri
   },
   routeRules: {
-    '/': { swr: 60 },
-    '/menu': { swr: 60 },
-    '/api/site': { swr: 30 },
+    // Tanpa cache halaman: isi publik selalu sama dengan yang diatur di /admin.
+    // (swr di Vercel menjadi ISR tanpa kedaluwarsa, sehingga perubahan admin tidak pernah tampil)
+    '/api/site': { headers: { 'cache-control': 'no-store' } },
     '/admin': { ssr: false },
     '/admin/**': { ssr: false }
   }
